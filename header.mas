@@ -1,0 +1,29 @@
+<div id="navigation">
+    <ul id="linkmenu">
+        <li><a href="index.mc">Home</a></li>
+        <li><a href="contact.mc">Kontakt</a></li>
+% if ($session{logged_in}) {
+        <li><a href="index.mc?showEditor=1" id="newEntry"><span class="icon icon-file-new"></span> Neuer Eintrag</a></li>
+% }
+    </ul>
+    <ul id="usermenu">
+% if (!$session{logged_in}) {
+% if (!$session{login_error_msg} eq "") {
+<script>alert("<% $session{login_error_msg} %>");</script>
+% $session{login_error_msg} = "";
+% }
+        <form action="login.mc" method="POST">
+            <input type="text" name="username">
+            <input type="password" name="password">
+            <input type="hidden" name="login" value="1">
+            <button class="button greenbutton">Login</button>
+        </form>
+% } else {
+        <form action="login.mc" method="POST">
+            <span id="username">Eingeloggt als <b><% $session{user} %></b></span>
+            <input type="hidden" name="logout" value="1">
+            <button class="button redbutton">Logout</button>
+        </form>
+% }
+    </ul>
+</div>

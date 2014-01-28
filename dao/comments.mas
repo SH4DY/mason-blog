@@ -1,0 +1,41 @@
+<%args>
+$id
+</%args>
+<%init>
+# get all comments
+my @comments;
+$dbx{'test'}->select({ fields => 'comment_text, comment_author',
+                       table => 'group2_comment',
+                       where => { 'entry_id' => [ '=', $id ]},
+                       order => 'comment_id ASC'
+});
+while (my $hr = $dbx{'test'}->fetchrow_hashref) {
+    push(@comments, "<b>$hr->{comment_author}</b>: $hr->{comment_text}");
+}
+</%init>
+<p id="comments_<% $id %>" class="comments">
+    <a><% scalar @comments %> Kommentare <span class="icon icon-chevron-down"></span></a>
+</p>
+<script>
+    $("#comments_<% $id %>").click(function() {
+        $("#commentbox_<% $id %>").slideToggle('slow');
+        $("#comments_<% $id %> span").toggleClass('icon-chevron-up');
+    });
+</script>
+<div class="clear"></div>
+<div id="commentbox_<% $id %>" class="commentbox">
+    <ul>
+% my $comment = "";
+% foreach $comment (@comments) {
+<li><% $comment %></li>
+% }
+    </ul>
+    <div class="newentry">
+        <form method="post" action="index.mc#entry<% $id %>">
+            <p>Name<input name="name" type="text"></p>
+            <p>Kommentar<input name="kommentar" type="text"></p>
+            <input name="entry_id" type="hidden" value="<% $id %>">
+            <input class="button" type="submit" value="Speichern">
+        </form>
+    </div>
+</div>

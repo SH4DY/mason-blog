@@ -1,0 +1,23 @@
+<%args>
+$jahr => ""
+$monat => ""
+$kategorie => ""
+</%args>
+<%init>
+###################################################
+# component for getting all entries from database #
+###################################################
+my @entry_ids;
+$dbx{'test'}->select({ fields => 'category_id, entry_id, DATE_FORMAT( entry_date, "%M" ) as monat, DATE_FORMAT( entry_date, "%Y" ) as jahr',
+    table => 'group2_entry',
+    where => '("'. $kategorie .'" LIKE "" OR category_id="'. $kategorie .'") AND ("'. $jahr .'" LIKE "" OR ("'. $monat .'" LIKE "" AND DATE_FORMAT( entry_date, "%Y" ) LIKE "'. $jahr .'") OR (DATE_FORMAT( entry_date, "%Y" ) LIKE "'. $jahr .'" AND DATE_FORMAT( entry_date, "%M" ) LIKE "'. $monat .'"))',
+    order => 'entry_id DESC'
+});
+while (my $hr = $dbx{'test'}->fetchrow_hashref) {
+    push(@entry_ids, $hr->{entry_id});
+}
+</%init>
+% my $id = 0;
+% foreach $id (@entry_ids) {
+    <& entry.mas, id => $id &>
+% }

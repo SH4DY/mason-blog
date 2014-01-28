@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+       "http://www.w3.org/TR/html4/loose.dtd">
+<html encoding="UTF-8">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="img/newspaper.ico" type="image/x-icon" />
+        <title>EasyBlog</title>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" href="css/jquery-ui.css" />
+        <link rel="stylesheet" href="css/iconfont.css" />
+        
+        <!-- jQuery -->
+        <script src="jquery/jquery-1.9.1.js"></script>
+        <script src="jquery/jquery-ui.js"></script>
+        <script type="text/javascript" src="jquery/index.js"></script>
+        
+    </head>
+<body>
+% $m->call_next;
+</body>
+</html>

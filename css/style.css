@@ -1,0 +1,195 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 13.2px;
+    font-family: sans-serif;
+    color: rgb(70, 70, 70);
+    background: rgb(243, 243, 243);
+    overflow:hidden;
+    min-width: 1000px;
+}
+body ul {
+    padding: 0;
+    list-style-type: none; 
+}
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    -o-transition:color .3s ease-out, background 1s ease-in;
+    -ms-transition:color .3s ease-out, background 1s ease-in;
+    -moz-transition:color .3s ease-out, background 1s ease-in;
+    -webkit-transition:color .3s ease-out, background 1s ease-in;
+    transition: color .3s ease-out, background 1s ease-in;
+}
+a:hover {
+    color: #3300CC;
+}
+.button, button, input[type="submit"] {
+    cursor: pointer;
+    margin: 0;
+    padding: 4px 10px;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2) inset, 0px 1px 2px rgba(0, 0, 0, 0.05);
+    color: rgb(70, 70, 70);
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+}
+.button:hover, button:hover {
+    border-color: rgba(128, 128, 128, 0.8);
+    outline: 0px none;
+}
+.redbutton {
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.25);
+    color: white;
+    background-color: rgb(229, 58, 72);
+    background-image: -moz-linear-gradient(center top , rgb(230, 67, 80), rgb(227, 44, 59));
+}
+.greenbutton {
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.25);
+    color: white;
+    background-color: rgb(128, 255, 0);
+    background-image: -moz-linear-gradient(center top , #8BD100, #7ebb00);
+}
+#navigation {
+    white-space: nowrap;
+    font-size: 14px;
+    height: 50px;
+    background: #fff;
+    box-shadow: 0px -1px rgb(207, 202, 202) inset;
+    position: absolute;
+    width: 100%;
+    top: 0px;
+}
+#linkmenu li, #usermenu li {
+    margin-left: 30px;
+    display: inline;
+}
+#content {
+    background: rgb(243, 243, 243);
+    z-index: 1;
+    margin-left: auto;
+    width: 970px;
+    margin-right: auto;
+}
+#wrapper {
+    position: absolute;
+    top: 50px;
+    padding-top: 15px;
+    width: 100%;
+    overflow: auto;
+}
+#linkmenu {
+    float: left;
+}
+#usermenu {
+    float: right;
+    margin: 10px;
+}
+#copyright {
+    color: rgb(153, 153, 153);
+    font-size: 10px;
+    text-align: center;
+    clear: both;
+}
+#dialog-form label {
+    float : left;
+    margin-bottom: 5px;
+}
+#dialog-form li {
+    margin-bottom: 20px;
+}
+#dialog-form input {
+    width: 100%;
+    float : right;
+}
+#sidebar {
+    margin-left: 50px;
+    width: 200px;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    display: inline-block;
+}
+#sidebar > ul {
+    padding-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+#sidebar > ul > li > ul {
+    padding-bottom: 10px;
+}
+
+#sidebar > ul > li {
+    padding-bottom: 5px;
+}
+
+
+#sidebar > ul > li > ul > li{
+    padding-left: 10px;    
+}
+input[type="text"], input[type="password"], textarea {
+    padding: 3px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(204, 204, 204);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+}
+input[type="text"]:hover, input[type="password"]:hover, textarea:hover {
+    border-color: rgba(0, 0, 0, 0.4);
+}
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+    border-color: rgba(82, 168, 236, 0.8);
+    outline: 0px none;
+}
+#username {
+    margin-right: 15px;
+}
+.commentbox {
+    border-top: 1px dotted #aaa;
+    margin-bottom: 20px;
+}
+.commentbox ul {
+    font-style: italic;
+}
+.entry {
+    width: 640px;
+    padding: 20px;
+    padding-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #fff;
+    margin-bottom: 20px;
+    line-height: 20px;
+    float: left;
+}
+.entry:hover {
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+.entry h2 {
+    float: left;
+    margin: 0;
+    text-shadow: 2px 2px 1.5px rgba(0, 0, 0, 0.3);
+}
+.entry span.icon-remove {
+    float: right;
+}
+.floatright {
+    float: right;
+}
+.clear {
+    clear: both;
+}
+.author {
+    color: rgb(153, 153, 153);
+    font-size: 10px;
+    float: left;
+}
+.comments {
+    float: right;
+    font-size: 10px;
+}
+.newentry textarea, .newentry input[type="text"] {
+    width: 100%; 
+}

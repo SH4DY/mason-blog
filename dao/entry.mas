@@ -1,0 +1,50 @@
+<%args>
+$id
+</%args>
+<%init>
+#################################################
+# component for getting one entry from database #
+#################################################
+
+# extract data from entry
+$dbx{'test'}->select({ fields => '*',
+                       table => 'group2_entry',
+                       where => { 'entry_id' => [ '=', $id ]}
+});
+my @id;
+my @title;
+my @date;
+my @text;
+my @author;
+while (my $hr = $dbx{'test'}->fetchrow_hashref) {
+    push(@id, "$hr->{entry_id}");
+    push(@title, "$hr->{entry_title}");
+    push(@date, "$hr->{entry_date}");
+    push(@text, "$hr->{entry_text}");
+    my $category_id = $hr->{category_id};
+    my $user_id = $hr->{user_id};
+    
+    # get author name
+    $dbx{'test'}->select({ fields => 'username',
+                           table => 'group2_user',
+                           where => { 'user_id' => [ '=', $user_id ]}
+    });
+    while (my $hr = $dbx{'test'}->fetchrow_hashref) {
+        push(@author, $hr->{username});
+    } 
+}
+</%init>
+
+<div class="entry" id="entry<% @id %>">
+    <h2><% @title %></h2>
+% if ($session{logged_in}) {
+    <div class="floatright">
+        <a href="index.mc?docid=<% @id %>&showEditor=1" style="margin-right:10px"><span class="icon icon-pencil"></span></a> 
+        <a href="index.mc?docid=<% @id %>&delete=1"><span class="icon icon-remove"></span></a>
+    </div>
+% }
+    <div class="clear"></div>
+    <p><% @text %></p>
+    <p class="author"><% @author %>, am <% @date %></p>
+    <& comments.mas, id => $id &>
+</div>

@@ -1,0 +1,75 @@
+<div id="sidebar">
+<%init>
+########################################
+# component for generating the sidebar #
+########################################
+my @entry_ids;
+my @entry_titles;
+$dbx{'test'}->select({ fields => 'entry_id, entry_title',
+                        table => 'group2_entry',
+                        order => 'entry_id DESC'
+});
+while (my $hr = $dbx{'test'}->fetchrow_hashref) {
+    push(@entry_ids, $hr->{entry_id});
+    push(@entry_titles, $hr->{entry_title});
+}
+
+my @monate;
+my @jahre;
+$dbx{'test'}->select({ fields => 'DISTINCT DATE_FORMAT( entry_date, "%Y" ) as jahr',
+                        table => 'group2_entry',
+                        order => 'entry_date DESC'
+});
+while (my $hr = $dbx{'test'}->fetchrow_hashref) {
+    push(@jahre, $hr->{jahr});
+}
+
+my @category_ids;
+my @category_titles;
+$dbx{'test'}->select({ fields => 'category_id, category_title',
+                        table => 'group2_category',
+                        order => 'category_title ASC'
+});
+while (my $hr = $dbx{'test'}->fetchrow_hashref) {
+    push(@category_ids, $hr->{category_id});
+    push(@category_titles, $hr->{category_title});
+}
+</%init>
+% my $id = 0;
+% my $i = 1;
+<b>Aktuellste Eintr&auml;ge</b>
+<ul>
+% for (my $i=0; $i < 10; $i++) {
+    <li><a href="index.mc#entry<% $entry_ids[$i] %>"><% $entry_titles[$i] %></a></li>
+% }
+</ul>
+<b>Archiv</b>
+<ul>
+% my $jahr = 0;
+% my $monat = 0;
+% foreach $jahr (@jahre) {
+<li><ul><a href="index.mc?jahr=<% $jahr %>"><% $jahr %></a>
+
+% @monate = undef;
+% $dbx{'test'}->select({ fields => 'DISTINCT DATE_FORMAT( entry_date, "%M" ) as monat',
+%                        table => 'group2_entry',
+%                        where => 'DATE_FORMAT( entry_date, "%Y" ) LIKE "'. $jahr .'"',
+%                        order => 'entry_date DESC'
+% });
+% while (my $hr = $dbx{'test'}->fetchrow_hashref) {
+%    push(@monate, $hr->{monat});
+% }
+
+%   foreach $monat (@monate) {
+<li><a href="index.mc?jahr=<% $jahr %>&monat=<% $monat %>"><% $monat %></a></li>
+%   }
+</ul></li>
+% }
+</ul>
+<b>Kategorien</b>
+<ul>
+% for (my $i=0; $i < scalar @category_ids; $i++) {
+    <li><a href="index.mc?kategorie=<% $category_ids[$i] %>"><% $category_titles[$i] %></a></li>
+% } 
+</ul>
+</div>
